@@ -13,7 +13,7 @@
 import java.util.Scanner;
 import java.util.HashMap;
 
-public class lab2 {
+public class t9spelling {
     public static void main (String[] args) {
         Scanner s = new Scanner(System.in);
 
