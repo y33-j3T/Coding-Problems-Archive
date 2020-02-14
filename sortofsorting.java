@@ -1,15 +1,15 @@
-import java.util.Scanner;
-import java.util.Arrays;
-
 /* Pseudocode
 while hasNextInt
-    1. Get number of names, which is the integer input
-    2. If number of names == 0, break & end program
-    3. For number of names, get name input into an array
-    4. Sort the array for first two alphabets
-    5. Print out all names in array
-    6. Print one new line
+1. Get number of names, which is the integer input
+2. If number of names == 0, break & end program
+3. For number of names, get name input into an array
+4. Sort the array for first two alphabets
+5. Print out all names in array
+6. Print one new line
 */
+
+import java.util.Scanner;
+import java.util.Arrays;
 
 public class sortofsorting{
     public static void main(String[] args) {

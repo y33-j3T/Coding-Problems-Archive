@@ -1,14 +1,13 @@
-// 1. Take in number of cases, N
-// 2. For (i, i < N, i++)
-// 	    1. Take in input
-// 	    2. For (j, j < length of input, j++)
-//  	   1. Take character and put it into hash map as key
-// 		   2. Append the value to the result string
-// 	    3. Print result string
-//
-// Offset Trick:
-// Consider an array of the following: arr = ["2", "22", "222", "3", "33"...]
-// Given a character, say, ch = 'a', i can do the magical block: arr[ch - 'a'] to obtain "2".
+/* Pseudocode
+1. Initialize a HashMap which maps the characters to the numbers to press
+2. Take in number of inputs
+3. For number of inputs
+    1. Take in input
+    2. For input.length
+        1. Take input[i] & put it into HashMap as key
+        2. Append value to result string (check if a spece char is needed)
+    3. Print result string
+*/
 
 import java.util.Scanner;
 import java.util.HashMap;
@@ -65,3 +64,17 @@ public class t9spelling {
         }
     }
 }
+
+/* Pseudocode - A better approach
+1. Take in number of cases, N
+2. For (i, i < N, i++)
+	    1. Take in input
+	    2. For (j, j < length of input, j++)
+ 	   1. Take character and put it into hash map as key
+		   2. Append the value to the result string
+	    3. Print result string
+
+Offset Trick:
+Consider an array of the following: arr = ["2", "22", "222", "3", "33"...]
+Given a character, say, ch = 'a', i can do the magical block: arr[ch - 'a'] to obtain "2".
+*/
