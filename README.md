@@ -1,9 +1,9 @@
-# Kattis
-My solutions for coding questions on Kattis.
-
 <p align="center">
   <img src="https://open.kattis.com/images/kattis/judge.png">
 </p>
+
+# Kattis
+My solutions for coding questions on Kattis.
 
 ## Contents
 - [Introduction](#Introduction)
