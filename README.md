@@ -21,5 +21,5 @@ To search for solution(s) for a specific problem, simply do <kbd> Ctrl </kbd> + 
 Kattis is licensed under the [MIT license](./LICENSE).
 
 <p align="center">
-  <img src="open.kattis.com/images/kattis/judge.png">
+  <img src="https://open.kattis.com/images/kattis/judge.png">
 </p>
