@@ -3,7 +3,7 @@
 </p>
 
 # Kattis
-My solutions for coding questions on Kattis.
+My solutions for coding problems on Kattis.
 
 ## Contents
 - [Introduction](#Introduction)
