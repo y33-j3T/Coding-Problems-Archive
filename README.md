@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://lh3.googleusercontent.com/proxy/GA_vuCsSaqTCZO65YdJNoMTSdhpvG9uxB6Z4jSmkwViItZmuJw8MvNBIE4Ygw9sbI6PPx_f6W46dgHdVf-SbpGvQlmY">
+  <img src="https://lh3.googleusercontent.com/proxy/bnnFDIMPCpXoGamnfR8Wd4wKM9oBqDNdxfidpDIqqZvzr8cqELOXc9ps5lJ5ink8n7aZTwJncDbHCG6sNl0vLpFvJ5g">
 </p>
 
 # Kattis
