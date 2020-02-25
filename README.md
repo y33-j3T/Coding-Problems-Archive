@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://lh3.googleusercontent.com/proxy/bnnFDIMPCpXoGamnfR8Wd4wKM9oBqDNdxfidpDIqqZvzr8cqELOXc9ps5lJ5ink8n7aZTwJncDbHCG6sNl0vLpFvJ5g">
+  <img src=".readme/kattis-logo.png">
 </p>
 
 # Kattis
@@ -24,5 +24,5 @@ Please refer to [CONTRIBUTE.md](./CONTRIBUTE.md) for details. :heart_eyes:
 Kattis is licensed under the [MIT license](./LICENSE).
 
 <p align="center">
-  <img src="https://open.kattis.com/images/kattis/judge.png">
+  <img src=".readme/kattis-cat.png">
 </p>
