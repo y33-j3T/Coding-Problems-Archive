@@ -22,7 +22,6 @@ public class joinstrings {
         int a = 1;
         int b = 1;
         int x = a;
-        String[] input;
         for (int i = 0; i < n - 1; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             a = Integer.parseInt(st.nextToken());
