@@ -7,17 +7,17 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Collections;
 
 public class conformity {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedOutputStream out = new BufferedOutputStream(System.out);
 
-        Map<HashSet> combo_count = new HashMap<>();
+        Map<Set, Integer> comboCount = new HashMap<>();
 
         int n = Integer.parseInt(br.readLine());
 
-        // StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
 
@@ -26,15 +26,19 @@ public class conformity {
                 combo.add(Integer.parseInt(st.nextToken()));
             }
 
-            if (combo_count.containsKey(combo)) {
-                combo_count.get(combo)++;
+            if (comboCount.containsKey(combo)) {
+                comboCount.put(combo, comboCount.get(combo) + 1);
             } else {
-                combo_count.put(combo, 1);
+                comboCount.put(combo, 1);
             }
-            // String command = st.nextToken();
-            // int x = Integer.parseInt(st.nextToken());
-            // String x = Integer.parseInt(br.readLine().replaceAll("\\s+", ""));
-            out.write(x);
         }
+		
+		int max = Collections.max(comboCount.values());
+		int count = Collections.frequency(comboCount.values(), max);
+
+		out.write(Integer.toString(count * max).getBytes());
+
+		out.close();
+		br.close();
     }
 }
