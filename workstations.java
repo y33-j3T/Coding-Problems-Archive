@@ -31,6 +31,7 @@ public class workstations {
         while (!pq.isEmpty()) {
             Integer[] timeSlot = pq.poll();
             endTimes.add(timeSlot[1]);  // add in newest expire time of a workstation
+
             if (timeSlot[0] < endTimes.peek()) {
                 continue;
             }
