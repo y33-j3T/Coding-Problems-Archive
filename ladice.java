@@ -20,7 +20,6 @@ public class ladice {
             int b = Integer.parseInt(st.nextToken()) - 1;
 
             disjSet.unionSet(a, b);
-            System.out.println(disjSet.numDisjointSets());
             boolean filled = disjSet.fillVacancy(disjSet.findSet(a));
 
             sb.append(filled ? "LADICA\n" : "SMECE\n");
@@ -35,18 +34,18 @@ public class ladice {
 class UnionFind {
     public int[] p;
     public int[] rank;
-    public boolean[] isVacant;
+    public int[] vacancy;
     public int numSets;
 
     public UnionFind(int N) {
         p = new int[N];
         rank = new int[N];
-        isVacant = new boolean[N];
+        vacancy = new int[N];
         numSets = N;
         for (int i = 0; i < N; i++) {
             p[i] = i;
             rank[i] = 0;
-            isVacant[i] = true;
+            vacancy[i] = 1;
         }
     }
 
@@ -58,12 +57,11 @@ class UnionFind {
     }
 
     public boolean fillVacancy(int setN) {
-        for (int i = 0; i < p.length; i++) {
-            if (p[i] == setN && isVacant[i]) {
-                isVacant[i] = false;
-                return true;
-            }
+        if (vacancy[setN] > 0) {
+            vacancy[setN]--;
+            return true;
         }
+
         return false;
     }
 
@@ -81,10 +79,13 @@ class UnionFind {
         // use rank to keep tree short
         if (rank[x] > rank[y]) {
             p[y] = x;
+            vacancy[x] += vacancy[y];
         } else {
             p[x] = y;
             if (rank[x] == rank[y]) rank[y]++;
+            vacancy[y] += vacancy[x];
         }
+
     }
 
     public int numDisjointSets() {
