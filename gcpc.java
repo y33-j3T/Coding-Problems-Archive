@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.BufferedOutputStream;
 import java.util.StringTokenizer;
+import java.util.Arrays;
 
 public class gcpc {
     public static void main(String[] args) throws Exception{
@@ -11,47 +12,14 @@ public class gcpc {
 
         int nTeam = Integer.parseInt(st.nextToken());
         int nEvent = Integer.parseInt(st.nextToken());
-        AVL<Team> avl = new AVL<>();
 
-        // Team t15 = new Team(15, 0, 0);
-        // Team t23 = new Team(23, 0, 0);
-        // Team t6 = new Team(6, 0, 0);
-        // Team t71 = new Team(71, 0, 0);
-        // Team t50 = new Team(50, 0, 0);
-        // Team t4 = new Team(4, 0, 0);
-        // Team t7 = new Team(7, 0, 0);
-        // Team t5 = new Team(5, 0, 0);
-        // Team t22 = new Team(22, 0, 0);
-        //
-        // avl.insert(t15);
-        // avl.insert(t23);
-        // avl.insert(t6);
-        // avl.insert(t71);
-        // avl.insert(t50);
-        // avl.insert(t4);
-        // avl.insert(t7);
-        // avl.insert(t5);
-        //
-        // System.out.println(avl.search(t71));         // found, 71
-        // System.out.println(avl.search(t7));          // found, 7
-        // System.out.println(avl.search(t22));         // not found, -1
-        //
-        // System.out.println(avl.findMin());          // 4
-        // System.out.println(avl.findMax());          // 71
-        //
-        // System.out.println(avl.successor(t23));      // 50
-        // System.out.println(avl.successor(t7));       // 15
-        // System.out.println(avl.successor(t71));      // -1
-        // System.out.println(avl.predecessor(t23));    // 15
-        // System.out.println(avl.predecessor(t7));     // 6
-        // System.out.println(avl.predecessor(t71));    // 50
-        //
-        // System.out.println("In-order:");
-        // avl.inorder();
+        AVL<Team> avl = new AVL<>();
+        for (int i = 0; i < nTeam; i++) {
+            avl.insert(new Team(i, 0, 0));
+        }
 
         int[] solvedArr = new int[nTeam];
         long[] penaltyArr = new long[nTeam];
-        Team favouriteTeam = new Team(0, solvedArr[0], penaltyArr[0]);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < nEvent; i++) {
             st = new StringTokenizer(br.readLine());
@@ -63,7 +31,7 @@ public class gcpc {
             penaltyArr[team] += penalty;
             avl.insert(new Team(team, solvedArr[team], penaltyArr[team]));
 
-            sb.append(nTeam - avl.rank(favouriteTeam) + 1);
+            sb.append(nTeam - avl.rank(new Team(0, solvedArr[0], penaltyArr[0])));
             sb.append("\n");
         }
 
@@ -105,24 +73,23 @@ class Team implements Comparable<Team> {
     }
 
     public int compareTo(Team other) {
-        if (this.totalSolved > other.totalSolved || this.totalSolved == other.totalSolved && this.totalPenalty < other.totalPenalty) {
+        if ((this.totalSolved > other.totalSolved) || (this.totalSolved == other.totalSolved && this.totalPenalty < other.totalPenalty)) {
             return 1;
         } else if (this.totalSolved == other.totalSolved && this.totalPenalty == other.totalPenalty) {
             if (this.id < other.id) return 1;
             else if (this.id > other.id) return -1;
             return 0;
         }
-
         return -1;
     }
 
     public String toString() {
-        return String.format("Team %d: solved - %d, penalty - %d", id, totalSolved, totalPenalty);
+        return String.format("Team %d: solved - %d, penalty - %d", id + 1, totalSolved, totalPenalty);
     }
 }
 
 class AVL<T extends Comparable<T>> {
-    Node<T> root;
+    public Node<T> root;
 
     public AVL() {
         this.root = null;
@@ -213,18 +180,18 @@ class AVL<T extends Comparable<T>> {
     private Node<T> insert(Node<T> curr, T val) {
         if (curr == null) return new Node<T>(val);
 
+        Node<T> temp = curr.parent;
         if (val.compareTo(curr.v) > 0) {
             curr.right = insert(curr.right, val);
             curr.right.parent = curr;
-            curr.height = Math.max(curr.right.height + 1, curr.height);
         } else {
             curr.left = insert(curr.left, val);
             curr.left.parent = curr;
-            curr.height = Math.max(curr.left.height + 1, curr.height);
         }
 
-        curr = balance(curr);
-        return curr;
+        updateHeight(curr);
+        updateSize(curr);
+        return balance(curr);
     }
 
     public void remove(T val) {
@@ -234,21 +201,19 @@ class AVL<T extends Comparable<T>> {
     private Node<T> remove(Node<T> curr, T val) {
         if (curr == null) return curr;
 
-        Node<T> temp = curr.parent;
         if (val.compareTo(curr.v) > 0) {
             curr.right = remove(curr.right, val);
         } else if (val.compareTo(curr.v) < 0) {
             curr.left = remove(curr.left, val);
         } else {
-            temp = curr.parent;
             if (curr.left == null && curr.right == null) {
-                curr = null;
+                return null;
             } else if (curr.left == null && curr.right != null) {
                 curr.right.parent = curr.parent;
-                curr = curr.right;
+                return curr.right;
             } else if (curr.left != null && curr.right == null) {
                 curr.left.parent = curr.parent;
-                curr = curr.left;
+                return curr.left;
             } else {
                 T successorV = successor(curr);
                 curr.v = successorV;
@@ -256,11 +221,23 @@ class AVL<T extends Comparable<T>> {
             }
         }
 
-        curr = balance(temp);
-        return curr;
+        updateHeight(curr);
+        updateSize(curr);
+        return balance(curr);
     }
 
     private Node<T> balance(Node<T> curr) {
+        if (height(curr.left) > height(curr.right) + 1) {
+            if (height(curr.left.right) > height(curr.left.left)) {
+                curr.left = leftRotate(curr.left);
+            }
+            curr = rightRotate(curr);
+        } else if (height(curr.right) > height(curr.left) + 1) {
+            if (height(curr.right.left) > height(curr.right.right)) {
+                curr.right = rightRotate(curr.right);
+            }
+            curr = leftRotate(curr);
+        }
 
         return curr;
     }
@@ -271,6 +248,11 @@ class AVL<T extends Comparable<T>> {
         Node<T> temp = curr.left.right;
         curr.left.right = curr;
         curr.left = temp;
+
+        updateHeight(curr);
+        updateHeight(child);
+        updateSize(curr);
+        updateSize(child);
         return child;
     }
 
@@ -280,6 +262,11 @@ class AVL<T extends Comparable<T>> {
         Node<T> temp = curr.right.left;
         curr.right.left = curr;
         curr.right = temp;
+
+        updateHeight(curr);
+        updateHeight(child);
+        updateSize(curr);
+        updateSize(child);
         return child;
     }
 
@@ -299,8 +286,21 @@ class AVL<T extends Comparable<T>> {
         }
     }
 
-    public int size(Node<T> curr) {
+    private void updateHeight(Node<T> curr) {
+        curr.height = Math.max(height(curr.left), height(curr.right)) + 1;
+    }
+
+    public int height(Node<T> curr) {
         if (curr == null) return -1;
+        return curr.height;
+    }
+
+    private void updateSize(Node<T> curr) {
+        curr.size = size(curr.left) + size(curr.right) + 1;
+    }
+
+    public int size(Node<T> curr) {
+        if (curr == null) return 0;
         return curr.size;
     }
 }
