@@ -4,29 +4,31 @@
 using namespace std;
 
 int main() {
-    int MAX_TEMPERATURE = 80;
     int n;
     cin >> n;
 
-    int temperature[n];
+    int temp[n];
     for (int i = 0; i < n; i++) {
-        cin >> temperature[i];
+        cin >> temp[i];
     }
 
-    int resTemperature1, resTemperature2;
-    int minTemperature = MAX_TEMPERATURE;
-    int minTemperatureIdx = 0;
+    int resIdx = 2;
+    int minTemp = 40;
+    int resFirst = temp[0];
+    int resFinal = temp[2];
     for (int i = 2; i < n; i++) {
-        int temperature1 = temperature[i - 2];
-        int temperature2 = temperature[i];
+        int tempFirst = temp[i - 2];
+        int tempFinal = temp[i];
 
-        if (temperature2 < minTemperature) {
-            minTemperatureIdx = i;
-            resTemperature1 = temperature1;
-            resTemperature2 = temperature2;
+        if ((tempFirst < minTemp && tempFinal < minTemp) &&
+            tempFirst + tempFinal != resFirst + resFinal) {
+            minTemp = max(tempFirst, tempFinal);
+            resIdx = i;
+            resFirst = tempFirst;
+            resFinal = tempFinal;
         }
     }
 
-    cout << minTemperatureIdx + 1 << " ";
-    cout << (resTemperature1 > resTemperature2 ? resTemperature1 : resTemperature2);
+    cout << resIdx - 1 << " ";
+    cout << (resFirst > resFinal ? resFirst : resFinal);
 }
