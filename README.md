@@ -12,7 +12,7 @@ My solutions for coding problems on Kattis.
 - [License](#License)
 
 ## Introduction
-This repository contains my solutions for coding problems on Kattis starting from February 2020.
+This repository contains my solutions for questions on Kattis starting from February 2020.
 
 ## Usage
 To search for solution(s) to a specific problem, simply do <kbd> Ctrl </kbd> + <kbd> F </kbd> and type in the problem ID as displayed on Kattis.
