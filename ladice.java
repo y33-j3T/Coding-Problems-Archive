@@ -85,7 +85,6 @@ class UnionFind {
             if (rank[x] == rank[y]) rank[y]++;
             vacancy[y] += vacancy[x];
         }
-
     }
 
     public int numDisjointSets() {
