@@ -123,3 +123,15 @@ class UnionFind {
         return numSets;
     }
 }
+
+/**
+* Alternative algorithm: Prim's
+* 1. Make adjList (optional)
+* 2. Set first vertex to taken, add neighbours to priority queue of IntegerTriplets
+* 3. while queue is not empty:
+*       1. dequeue edge
+*       2. if v of edge is not taken:
+*           1. ouput edge (u, v)
+*           2. set v to taken
+*           3. add neighbors of v that are not taken to queue
+*/
