@@ -1,9 +1,5 @@
-<p align="center">
-  <img src=".readme/kattis-logo.png">
-</p>
-
-# Kattis
-My solutions for coding problems on Kattis.
+# Coding-Problems-Archive
+My solutions for coding problems from various sources such as Kattis, internship tests etc..
 
 ## Contents
 - [Introduction](#Introduction)
@@ -12,10 +8,10 @@ My solutions for coding problems on Kattis.
 - [License](#License)
 
 ## Introduction
-This repository contains my solutions for questions on Kattis starting from February 2020.
+This repository is an archive of my solutions for coding problems from various sources such as Kattis, internship tests etc..
 
 ## Usage
-To search for solution(s) to a specific problem, simply do <kbd> Ctrl </kbd> + <kbd> F </kbd> and type in the problem ID as displayed on Kattis.
+For Kattis, to search for solution(s) to a specific problem, simply do <kbd> Ctrl </kbd> + <kbd> F </kbd> and type in the problem ID as displayed on Kattis.
 
 ## Contributing
 Please refer to [CONTRIBUTE.md](./CONTRIBUTE.md) for details. :heart_eyes:
